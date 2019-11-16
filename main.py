@@ -1,22 +1,28 @@
 import pandas as pd
+import numpy as np
 
 def get_csv_data(file_path):
-    return pd.read_csv(file_path, usecols=['title', 'publication'])
+    return pd.read_csv(file_path, usecols=['title', 'publication'], dtype={'title': str , 'publication': str})
 
-new_sources = set()
+data_by_publication = dict()
+
 data_paths = [
     './articles1.csv',
     './articles2.csv',
     './articles3.csv',
 ]
 
-# CSV Data as data frame
 for path in data_paths:
     data = get_csv_data(path)
 
     for row in data.iterrows():
-        new_sources.add(row[1]['publication'])
+        pub = row[1]['publication']
+        title = row[1]['title']
 
-for publication in new_sources:
-        print(publication)
+        if pub in data_by_publication:
+            data_by_publication[pub].append(title)
+        else:
+            data_by_publication[pub] = [title]
 
+for pub in data_by_publication:
+    print(str(len(data_by_publication[pub])) + ' titles from ' + pub)
