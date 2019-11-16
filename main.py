@@ -26,3 +26,12 @@ for path in data_paths:
 
 for pub in data_by_publication:
     print(str(len(data_by_publication[pub])) + ' titles from ' + pub)
+
+
+# Deterine label of titles by source
+
+# Drop any center sources
+
+# Concatenate left and right sources
+
+# Clean data?
