@@ -46,7 +46,7 @@ bias_ratings = {
   'Washington Post': 'left',
 }
 
-# Concatentate left/right sources
+# Concatenate left/right sources
 left_publications = []
 right_publications = []
 for pub in data_by_publication:
@@ -56,5 +56,21 @@ for pub in data_by_publication:
     if bias_ratings[pub] == 'right':
         right_publications.extend(data_by_publication[pub])
 
-print('Total of ' + str(len(right_publications)) + ' right articles!')
-print('Total of ' + str(len(left_publications)) + ' left articles!')
+num_right = len(right_publications)
+num_left = len(left_publications)
+
+print('Totals before evening out...')
+print('Total of ' + str(num_right) + ' right articles!')
+print('Total of ' + str(num_left) + ' left articles!')
+
+if (num_left > num_right):
+    left_publications = left_publications[:num_right]
+elif (num_right > num_left):
+    right_publications = right_publications[:num_left]
+
+
+num_right = len(right_publications)
+num_left = len(left_publications)
+
+print('Total of ' + str(num_right) + ' right articles!')
+print('Total of ' + str(num_left) + ' left articles!')
