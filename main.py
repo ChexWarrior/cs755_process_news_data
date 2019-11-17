@@ -27,11 +27,34 @@ for path in data_paths:
 for pub in data_by_publication:
     print(str(len(data_by_publication[pub])) + ' titles from ' + pub)
 
+# Determine label of titles by source
+bias_ratings = {
+  'New York Times': 'left',
+  'Breitbart': 'right',
+  'CNN': 'left',
+  'Business Insider': 'center',
+  'Atlantic': 'left',
+  'Fox News': 'right',
+  'Talking Points Memo': 'unknown',
+  'Buzzfeed News': 'left',
+  'National Review': 'right',
+  'New York Post': 'right',
+  'Guardian': 'left',
+  'NPR': 'center',
+  'Reuters': 'center',
+  'Vox': 'left',
+  'Washington Post': 'left',
+}
 
-# Deterine label of titles by source
+# Concatentate left/right sources
+left_publications = []
+right_publications = []
+for pub in data_by_publication:
+    if bias_ratings[pub] == 'left':
+        left_publications.extend(data_by_publication[pub])
 
-# Drop any center sources
+    if bias_ratings[pub] == 'right':
+        right_publications.extend(data_by_publication[pub])
 
-# Concatenate left and right sources
-
-# Clean data?
+print('Total of ' + str(len(right_publications)) + ' right articles!')
+print('Total of ' + str(len(left_publications)) + ' left articles!')
