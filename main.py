@@ -4,8 +4,8 @@ import numpy as np
 def get_csv_data(file_path):
     return pd.read_csv(file_path, usecols=['title', 'publication'], dtype={'title': str , 'publication': str})
 
+max_title_length = -1
 data_by_publication = dict()
-
 data_paths = [
     './articles1.csv',
     './articles2.csv',
@@ -74,3 +74,18 @@ num_left = len(left_publications)
 
 print('Total of ' + str(num_right) + ' right articles!')
 print('Total of ' + str(num_left) + ' left articles!')
+
+# Combine data
+all_titles = left_publications + right_publications
+all_words = [s.split(" ") for s in all_titles]
+
+# Create labels
+# 0 left, 1 is right
+labels = [0] * num_left
+labels.extend([1] * num_right)
+
+for w in all_words:
+    print(w)
+    print('---')
+
+
