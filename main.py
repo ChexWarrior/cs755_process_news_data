@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import keras
 
 def get_csv_data(file_path):
     return pd.read_csv(file_path, usecols=['title', 'publication'], dtype={'title': str , 'publication': str})
@@ -84,8 +85,13 @@ all_words = [s.split(" ") for s in all_titles]
 labels = [0] * num_left
 labels.extend([1] * num_right)
 
+# Determine max length
 for w in all_words:
-    print(w)
-    print('---')
+    if (len(w) > max_title_length):
+        max_title_length = len(w)
+
+print('Max Title Length: ' + str(max_title_length))
 
 
+
+# Tokenize
