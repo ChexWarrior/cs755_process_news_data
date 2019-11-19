@@ -1,7 +1,10 @@
 import pandas as pd
 import numpy as np
 import keras
+import sklearn
+import pickle
 
+from sklearn.model_selection import train_test_split
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
 from keras.utils import to_categorical
@@ -88,20 +91,9 @@ all_words = [s.split(" ") for s in all_titles]
 labels = [[0,1]] * num_left
 labels.extend([[1,0]] * num_right)
 
-# Determine max length
-for w in all_words:
-    if (len(w) > max_title_length):
-        max_title_length = len(w)
+# Save labels and text
+with open('data', 'wb') as f:
+  pickle.dump(all_words, f)
 
-print('Max Title Length: ' + str(max_title_length))
-
-# Tokenize
-tokenizer = Tokenizer()
-tokenizer.fit_on_texts(all_words)
-sequences = tokenizer.texts_to_sequences(all_words)
-
-word_index = tokenizer.word_index
-data = pad_sequences(sequences, maxlen=max_title_length)
-
-np.savetxt(fname='data.csv', delimiter=',', X=data)
-np.savetxt(fname='labels.csv', delimiter=',', X=np.asarray(labels))
+with open('labels', 'wb') as f:
+  pickle.dump(labels, f)
