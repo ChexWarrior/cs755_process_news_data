@@ -34,15 +34,20 @@ data = pad_sequences(sequences, maxlen=max_title_length)
 
 X_train, X_test_, y_train, y_test = train_test_split(data, labels)
 
-# embeddings_index = {}
-# f = open('./glove.6B.50d.txt')
-# for line in f:
-#   values = line.split()
-#   word = values[0]
-#   coefs = np.asarray(values[1:], dtype='float32')
-#   embeddings_index[word] = coefs
-# f.close()
+embeddings_index = {}
+f = open('./glove.6B.50d.txt')
+for line in f:
+  values = line.split()
+  word = values[0]
+  coefs = np.asarray(values[1:], dtype='float32')
+  embeddings_index[word] = coefs
+f.close()
 
-# embeddings_matrix = np.zeros((len(word_index)))
+print('Found %s word vectors.' % len(embeddings_index))
 
-# print('Found %s word vectors.' % len(embeddings_index))
+embedding_matrix = np.zeros((len(word_index) + 1, 50))
+
+for word, i in word_index.items():
+  embedding_vector = embeddings_index.get(word)
+  if embedding_vector is not None:
+    embedding_matrix[i] = embedding_vector
