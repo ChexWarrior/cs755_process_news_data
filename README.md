@@ -3,9 +3,6 @@
 ## Description
 Process the data in the ["All the News"](https://www.kaggle.com/snapcrack/all-the-news/data) dataset so it can be used in my CNN.
 
-## Next steps
-Clean #xa0 character!
-
 ## Procedure
 1. Determine available news sources in set
 2. Determine bias of those new sources using [Allsides](https://www.allsides.com/unbiased-balanced-news).

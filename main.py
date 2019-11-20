@@ -25,7 +25,8 @@ for path in data_paths:
 
     for row in data.iterrows():
         pub = row[1]['publication']
-        title = row[1]['title']
+        title = str(row[1]['title'])
+        title = title.replace('\xa0', ' ')
 
         if pub in data_by_publication:
             data_by_publication[pub].append(title)
